@@ -8,49 +8,49 @@ namespace PersonalAccountant
 {
     public static class Accountant
     {
+        private static Account MyAccount { get; set; }
+        private static IList<ExpensesViewData> ExpensesViewData { get; set; }
         //private const float dreamlineBuffer = 1.3f;
 
         static Accountant()
         {
-            Expense.ExpenseViewData = new List<ExpenseViewData>();
+            ExpensesViewData = new List<ExpensesViewData>();
             
             var expensesCategories = Enum.GetValues(typeof(ExpenseCategory)).Cast<ExpenseCategory>();
             
             foreach (var ctg in expensesCategories)
             {
-                Expense.ExpenseViewData.Add(new ExpenseViewData(ctg));
+                ExpensesViewData.Add(new ExpensesViewData(ctg));
             }
             Account = new Account();
         }
 
         public static void AddExpense(string category, string description, string amount)
         {
-            Account.AddExpense(new Expense(category, description, decimal.Parse(amount), DateTime.Now));
-            ((MainWindow)System.Windows.Application.Current.MainWindow).LogDG.Items.Refresh();
+            Account.MonthlyExpenses.Add((new Expense(category, description, decimal.Parse(amount), DateTime.Now)));
         }
 
         public static void AddProfit(string description, string value)
         {
-            Account.AddProfit(new Profit(description, decimal.Parse(value), DateTime.Now));
-            ((MainWindow)System.Windows.Application.Current.MainWindow).LogDG.Items.Refresh();
+            Account.MonthlyProfits.Add(new Profit(description, decimal.Parse(value), DateTime.Now));
         }
 
         private static Account Account { get; set; }
 
         public static void Init(string v)
         {
-
+            MyAccount = new Account();
         }
 
         public static void BindingViews(Grid accountGrid, DataGrid dataGridExpenses, DataGrid dataGridLog)
         {
-            dataGridExpenses.ItemsSource = Expense.ExpenseViewData;
+            dataGridExpenses.ItemsSource = ExpensesViewData;
             accountGrid.DataContext = Account;
             dataGridLog.ItemsSource = TransactionsLog.Instance().LogList();
         }
         public static void BindingExpenses(ComboBox dataExpensesView)
         {
-            dataExpensesView.ItemsSource = Expense.ExpenseViewData;
+            dataExpensesView.ItemsSource = ExpensesViewData;
         }
     }
 }

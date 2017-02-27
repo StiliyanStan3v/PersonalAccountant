@@ -4,14 +4,17 @@ using System.Windows.Media;
 
 namespace PersonalAccountant.Data
 {
-    public class ExpenseViewData : INotifyPropertyChanged
+    public class ExpensesViewData : INotifyPropertyChanged
     {
         private decimal plannedFunds;
         private decimal spentFunds;
 
+        public Brush Color { get; set; }
+        public FontWeight FontWeight { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ExpenseViewData(ExpenseCategory category)
+        public ExpensesViewData(ExpenseCategory category)
         {
             this.Category = Helper.ToString(category);
             this.Color = new SolidColorBrush(Colors.Black);
@@ -42,8 +45,7 @@ namespace PersonalAccountant.Data
                 OnPropertyChanged("SpentFunds");
             }
         }
-        public Brush Color { get; set; }
-        public FontWeight FontWeight { get; set; }
+       
 
         protected void OnPropertyChanged(string name)
         {

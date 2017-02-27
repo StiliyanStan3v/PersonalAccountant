@@ -1,6 +1,4 @@
-﻿using PersonalAccountant.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace PersonalAccountant
 {
@@ -28,7 +26,7 @@ namespace PersonalAccountant
 
     public class Expense : Transaction
     {
-        private static IList<ExpenseViewData> expenseViewData;
+        //private static IList<ExpenseViewData> expenseViewData;
 
         public Expense(string category, string description, decimal value)
             : base(description, value)
@@ -42,20 +40,22 @@ namespace PersonalAccountant
 
         }
 
-        public static IList<ExpenseViewData> ExpenseViewData
-        {
-            get
-            {
-                return expenseViewData;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    value = new List<ExpenseViewData>();
-                }
-                expenseViewData = value;
-            }
-        }
+
+
+       //public static IList<ExpenseViewData> ExpenseViewData
+       //{
+       //    get
+       //    {
+       //        return expenseViewData;
+       //    }
+       //    set
+       //    {
+       //        if (value == null)
+       //        {
+       //            value = new List<ExpenseViewData>();
+       //        }
+       //        expenseViewData = value;
+       //    }
+       //}
     }
 }

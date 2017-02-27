@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccountant", "PersonalAccountant\PersonalAccountant.csproj", "{536A25F7-F655-4DA7-8160-091A4359A309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountantView", "PersonalAccountant\AccountantView.csproj", "{536A25F7-F655-4DA7-8160-091A4359A309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountantModel", "AccountantModel\AccountantModel.csproj", "{1D8BFC0B-5679-431A-997E-8CA9475D58A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{1EAB03ED-025A-4B84-B62E-7FD52178AB3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{536A25F7-F655-4DA7-8160-091A4359A309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{536A25F7-F655-4DA7-8160-091A4359A309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{536A25F7-F655-4DA7-8160-091A4359A309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8BFC0B-5679-431A-997E-8CA9475D58A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8BFC0B-5679-431A-997E-8CA9475D58A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8BFC0B-5679-431A-997E-8CA9475D58A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8BFC0B-5679-431A-997E-8CA9475D58A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EAB03ED-025A-4B84-B62E-7FD52178AB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EAB03ED-025A-4B84-B62E-7FD52178AB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EAB03ED-025A-4B84-B62E-7FD52178AB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EAB03ED-025A-4B84-B62E-7FD52178AB3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -55,17 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Account.cs" />
-    <Compile Include="Data\Expense.cs" />
-    <Compile Include="Data\Accountant.cs" />
-    <Compile Include="Data\ExpenseViewData.cs" />
-    <Compile Include="Data\Helper.cs" />
-    <Compile Include="Data\Profit.cs" />
-    <Compile Include="Data\Transaction.cs" />
     <Compile Include="ExpenseWindow.xaml.cs">
       <DependentUpon>ExpenseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Log\TransactionsLog.cs" />
     <Page Include="ExpenseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,7 +108,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{1eab03ed-025a-4b84-b62e-7fd52178ab3a}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Money.jpg" />
   </ItemGroup>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace PersonalAccountant
+﻿namespace PersonalAccountant
 {
-    public abstract class Transaction : INotifyPropertyChanged
+    using System;
+    using System.ComponentModel;
+
+    public abstract class Transaction : ITransaction
     {
         private decimal value;
         private string description;

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace PersonalAccountant
+﻿namespace PersonalAccountant
 {
+    using System.Collections.Generic;
+
     public sealed class TransactionsLog
     {
         private static readonly TransactionsLog TransactionInstance = new TransactionsLog();
