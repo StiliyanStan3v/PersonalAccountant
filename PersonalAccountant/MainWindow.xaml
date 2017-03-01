@@ -80,7 +80,7 @@
                 <RowDefinition Height="121*"/>
                 <RowDefinition Height="144*"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="ExpensesGrid" HorizontalAlignment="Left" Width="370" Foreground="#FF2E2E2E" 
+            <DataGrid ItemsSource="{Binding MonthlyExpenses}" Name="ExpensesGrid" HorizontalAlignment="Left" Width="370" Foreground="#FF2E2E2E" 
                       AutoGenerateColumns="False" GridLinesVisibility="None" SelectionUnit="FullRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Grid.RowSpan="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Category" Binding="{Binding Category}"  IsReadOnly="True">
@@ -154,7 +154,7 @@
                 <Label x:Name="CurrentDecimalLabel" Content="{Binding CurrentFunds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,5,0,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="SavingsDecimalLabel" Content="{Binding Savings, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,40,0,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,75,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpens, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,145,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
             </Grid>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,340,0,0" Height="60" Width="360">

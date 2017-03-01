@@ -10,8 +10,6 @@ namespace PersonalAccountant
         public MainWindow()
         {
             InitializeComponent();
-            Accountant.Init("");
-            Accountant.BindingViews(this.AccountGrid, this.ExpensesGrid, this.LogDG);
         }
 
         private void AddProfit_Click(object sender, RoutedEventArgs e)

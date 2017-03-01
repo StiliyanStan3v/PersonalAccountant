@@ -43,9 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accountant.cs" />
-    <Compile Include="ExpensesViewData.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="AccountantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

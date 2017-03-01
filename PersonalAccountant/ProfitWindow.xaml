@@ -112,7 +112,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button x:Name="AddProfitBtn" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Style="{DynamicResource RoundCorner}" Click="AddProfitBtn_Click" />
+        <Button x:Name="AddProfitBtn" Command="{Binding AddProfitCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Style="{DynamicResource RoundCorner}" Click="AddProfitBtn_Click" />
         <TextBox x:Name="ProfitTB" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="160" Margin="0,0,0,30"
                  TextWrapping="Wrap" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <TextBox.Style>

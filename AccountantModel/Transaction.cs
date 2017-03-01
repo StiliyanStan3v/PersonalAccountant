@@ -1,15 +1,9 @@
 ﻿namespace PersonalAccountant
 {
     using System;
-    using System.ComponentModel;
 
     public abstract class Transaction : ITransaction
     {
-        private decimal value;
-        private string description;
-        private DateTime transactionDate;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected Transaction() { }
 
@@ -34,53 +28,12 @@
             this.TransactionDate = transactionDate;
         }
 
-        public string Description
-        {
-            get
-            {
-                return this.description;
-            }
-            set
-            {
-                this.description = value;
-                OnPropertyChanged("Description");
-            }
-        }
+        public string Description { get; set; }
 
-        public decimal Value
-        {
-            get
-            {
-                return this.value;
-            }
-            set
-            {
-                this.value = value;
-                OnPropertyChanged("Value");
-            }
-        }
-        public DateTime TransactionDate
-        {
-            get
-            {
-                return this.transactionDate;
-            }
-            set
-            {
-                this.transactionDate = value;
-                OnPropertyChanged("TransactionDate");
-            }
-        }
+        public decimal Value { get; set; }
+
+        public DateTime TransactionDate { get; set; }
+
         public string Category { get; set; }
-
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
     }
 }
