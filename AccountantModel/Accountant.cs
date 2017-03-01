@@ -5,10 +5,17 @@
     using System.ComponentModel;
     using System.Linq;
 
-    public class Accountant : INotifyPropertyChanged
+    public class Accountant
     {
         public Account MyAccount { get; set; }
         public MonthlyExpensesControl ExpensesView { get; set; }
+
+        public decimal AddFund { get; set; }
+
+        public decimal AddingFunds(decimal value)
+        {
+            return MyAccount.Funds += value;
+        }
 
         public ICollection<MonthlyExpenseViewData> MonthlyExpenseView { get; private set; }
 
@@ -18,21 +25,13 @@
             ExpensesView = new MonthlyExpensesControl();
         }
 
-        public decimal MonthlyProfit
-        {
-            get
-            {
-                return MyAccount.MonthlyProfits != null ? MyAccount.MonthlyProfits.Select(mp => mp.Value).Sum() : 0;
-            }
-        }
-
-        public decimal CurrentExpenses
-        {
-            get
-            {
-                return MyAccount.MonthlyExpenses != null ? MyAccount.MonthlyExpenses.Select(mp => mp.Value).Sum() : 0;
-            }
-        }
+        //public decimal MonthlyProfit
+        //{
+        //    get
+        //    {
+        //        return MyAccount.MonthlyProfits != null ? MyAccount.MonthlyProfits.Select(mp => mp.Value).Sum() : 0;
+        //    }
+        //}
 
         public decimal PlannedExpenses
         {
@@ -46,25 +45,22 @@
         {
             get
             {
-                return MonthlyProfit - ExpensesView.ExpensesViewDataList.Select(expData => expData.PlannedFunds).Sum();
+                return MyAccount.MonthlyProfit - ExpensesView.ExpensesViewDataList.Select(expData => expData.PlannedFunds).Sum();
             }
         }
-        
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public static Accountant Load(string path)
         {
             throw new NotImplementedException();
         }
-
-        public void AddExpense(string category, string description, string amount)
+        public void AddExpense(string category, decimal value)
         {
-            MyAccount.MonthlyExpenses.Add((new Expense(category, description, decimal.Parse(amount), DateTime.Now)));
-        }
+            MyAccount.Funds -= value;
+            MyAccount.CurrentExpenses += value;
 
-        public void AddProfit(string description, string value)
-        {
-            MyAccount.MonthlyProfits.Add(new Profit(description, decimal.Parse(value)));
+            ExpensesView.ExpensesViewDataList.Where(evd => evd.Category == category)
+                                    .FirstOrDefault()
+                                    .SpentFunds += value;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace PersonalAccountant.Data
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     public class CustomControlObservableColletion : System.Collections.ObjectModel.ObservableCollection<MonthlyExpenseViewData>
     {
@@ -36,6 +38,18 @@
                 default:
                     return category.ToString();
             }
+        }
+
+        public static List<string> Categories()
+        {
+            var categories = new List<string>();
+
+            foreach (ExpenseCategory expCategory in Enum.GetValues(typeof(ExpenseCategory)))
+            {
+                categories.Add(Helper.ToString(expCategory));
+            }
+
+            return categories;
         }
     }
 }

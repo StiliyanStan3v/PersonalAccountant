@@ -10,6 +10,9 @@ namespace PersonalAccountant.Data
 
         public decimal Funds { get; set; }
 
+        public decimal MonthlyProfit { get; set; }
+        public decimal CurrentExpenses { get; set; }
+
         public Account()
         {
             MonthlyExpenses = new List<Expense>();
@@ -32,44 +35,5 @@ namespace PersonalAccountant.Data
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void AddProfit(Profit profit)
-        //{
-        //    this.CurrentFunds += profit.Value;
-        //    this.MonthlyProfits.Add(profit);
-        //    OnPropertyChanged("MonthlyProfit");
-        //    OnPropertyChanged("SavingPlan");
-        //
-        //    TransactionsLog.Instance().SaveToLog(profit);
-        //}
-
-        //public void AddExpense(Expense expense)
-        //{
-        //    this.CurrentFunds -= expense.Value;
-        //    this.CurrentExpens += expense.Value;
-        //    this.MonthlyExpenses.Add(expense);
-        //    OnPropertyChanged("CurrentExpens");
-        //
-        //    Expense.ExpenseViewData.Where(evd => evd.Category == expense.Category)
-        //                            .FirstOrDefault()
-        //                            .SpentFunds += expense.Value;
-        //
-        //    TransactionsLog.Instance().SaveToLog(expense);
-        //}
-
-        //public void AddSaving(decimal saving)
-        //{
-        //    this.Savings += saving;
-        //}
-
-        //protected void OnPropertyChanged(string name)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null)
-        //    {
-        //        handler(this, new PropertyChangedEventArgs(name));
-        //    }
-        //}
     }
 }

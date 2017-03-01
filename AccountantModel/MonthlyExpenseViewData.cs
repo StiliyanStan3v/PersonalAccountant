@@ -36,6 +36,7 @@
                 this.spentFunds = value;
                 OnPropertyChanged("Color");
                 OnPropertyChanged("FontWeight");
+                OnPropertyChanged("SpentFunds");
             }
         }
         public Brush Color

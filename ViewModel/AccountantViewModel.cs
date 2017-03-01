@@ -5,7 +5,6 @@
     using System.IO;
     using System.Windows.Input;
     using ViewModel;
-    using System;
     using System.ComponentModel;
 
     public class AccountantViewModel : INotifyPropertyChanged
@@ -33,9 +32,8 @@
         }
 
         public ICommand UpdateButtonCommand { get; set; }
-        public ICommand SettingsButtonCommand { get; set; }
-
-        
+        public ICommand AddFundsCommand { get; set; }
+        public ICommand AddExpenseCommand { get; set; }
 
         public Accountant _Accountant { get; set; }
 
@@ -50,7 +48,8 @@
                 _Accountant = new Accountant();
             }
             UpdateButtonCommand = new RelayCommand(UpdateAccountInfo, param => this.canExecute);
-            SettingsButtonCommand = new RelayCommand(ChangeSettings, param => this.canExecute);
+            AddFundsCommand = new RelayCommand(AddFunds, param => this.canExecute);
+            AddExpenseCommand = new RelayCommand(AddExpenses, param => this.canExecute);
         }
 
         private void UpdateAccountInfo(object obj)
@@ -58,17 +57,24 @@
             OnPropertyChanged("SavingPlan");
             OnPropertyChanged("PlannedExpenses");
         }
-        private void ChangeSettings(object obj)
+        private void AddFunds(object obj)
         {
-            _Accountant.AddProfit("Selary", "1000");
+            _Accountant.AddingFunds(AddFund);
+            OnPropertyChanged("Funds");
+        }
+        private void AddExpenses(object obj)
+        {
+            _Accountant.AddExpense(SelectedCategory, ExpenseValue);
+            OnPropertyChanged("CurrentExpenses");
+            OnPropertyChanged("Funds");
         }
 
-
-        public ICollection<MonthlyExpenseViewData> MonthlyExpenses
+        public List<string> ExpenseCategories
         {
             get
             {
-                return _Accountant.ExpensesView.ExpensesViewDataList;
+                List<string> categories = Helper.Categories();
+                return categories;
             }
         }
 
@@ -76,7 +82,22 @@
         {
             get
             {
-                return _Accountant.MonthlyProfit;
+                return _Accountant.MyAccount.MonthlyProfit;
+            }
+            set
+            {
+                _Accountant.MyAccount.MonthlyProfit = value;
+                OnPropertyChanged("MonthlyProfit");
+            }
+        }
+
+        public decimal AddFund { get; set; }
+
+        public ICollection<MonthlyExpenseViewData> MonthlyExpenses
+        {
+            get
+            {
+                return _Accountant.ExpensesView.ExpensesViewDataList;
             }
         }
 
@@ -92,9 +113,12 @@
         {
             get
             {
-                return _Accountant.CurrentExpenses;
+                return _Accountant.MyAccount.CurrentExpenses;
             }
         }
+        public string SelectedCategory { get; set; }
+
+        public decimal ExpenseValue { get; set; }
 
         public decimal SavingPlan
         {

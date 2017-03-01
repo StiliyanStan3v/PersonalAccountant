@@ -15,6 +15,6 @@
             {
                 ExpensesViewDataList.Add(new MonthlyExpenseViewData() { Category = Helper.ToString(expCategory) });
             }
-        }
+        }     
     }
 }

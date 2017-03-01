@@ -142,56 +142,12 @@
                 <Label x:Name="SettingsLable" Content="Settings" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
                 <Grid Height="110" Margin="0,50,0,0">
                     <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
-                    <Button x:Name="AddFunds_Btn" Content="Add funds" Width="120" Height="35" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13,20,0" Style="{DynamicResource RoundCorner}"/>
-                    <TextBox x:Name="FundsTB" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="170" Margin="20,10,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21">
-                        <TextBox.Style>
-                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                                <Style.Resources>
-                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
-                                        <VisualBrush.Visual>
-                                            <Label Content="Value" Foreground="LightGray" FontSize="21" />
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Style.Resources>
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="IsKeyboardFocused" Value="True">
-                                        <Setter Property="Background" Value="White" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
+                    <Button x:Name="AddFunds_Btn" Command="{Binding AddFundsCommand}" Content="Add funds" Width="120" Height="35" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13,20,0" Style="{DynamicResource RoundCorner}"/>
+                    <TextBox x:Name="FundsTB" Text="{Binding AddFund}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                            BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="170" Margin="20,10,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21" Background="Transparent">
                     </TextBox>
-                    <TextBox x:Name="MonthlyProfitsTB" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    <TextBox x:Name="MonthlyProfitsTB" Text="{Binding MonthlyProfit, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                             BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="170" Margin="20,60,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21">
-                        <TextBox.Style>
-                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                                <Style.Resources>
-                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
-                                        <VisualBrush.Visual>
-                                            <Label Content="Monthly profit" Foreground="LightGray" FontSize="21" />
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Style.Resources>
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="IsKeyboardFocused" Value="True">
-                                        <Setter Property="Background" Value="White" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
                     </TextBox>
                     <Label x:Name="MonthlyProfitLable" Content="Monthly profit" HorizontalAlignment="Right" Margin="0,63,20,0" VerticalAlignment="Top" FontSize="17" Foreground="#FF464F59" />
                 </Grid>
@@ -199,7 +155,7 @@
         </Grid>
         <Grid Name="AccWrapper" Width="380" Height="660" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
             <Label Content="Your accountant" HorizontalAlignment="Center" Margin="0,-10,0,0" VerticalAlignment="Top" FontSize="40" Foreground="#FF379797" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            <Label x:Name="accountTitleLable" Content="Account" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
+            <Label x:Name="accountTitleLable" Content="Account" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
             <Grid Name ="AccountGrid" Width="380" Height="240" Margin="0,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
                 <Label x:Name="CurrentFundsLabel" Content="Funds" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
@@ -213,8 +169,7 @@
                 <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,40,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,75,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Button Content="Update" Command="{Binding UpdateButtonCommand}" HorizontalAlignment="Center" FontSize="17" VerticalAlignment="Bottom" Width="90" Height="35" Margin="120,0,0,10" Style="{DynamicResource RoundCorner}"/>
-                <Button Content="Edit" Command="{Binding EditButtonCommand}" HorizontalAlignment="Center" FontSize="17" VerticalAlignment="Bottom" Width="90" Height="35" Margin="0,0,120,10" Style="{DynamicResource RoundCorner}"/>
+                <Button Content="Update" Command="{Binding UpdateButtonCommand}" HorizontalAlignment="Center" FontSize="17" VerticalAlignment="Bottom" Width="90" Height="35" Margin="180,0,0,17" Style="{DynamicResource RoundCorner}"/>
             </Grid>
             <Label x:Name="ExpenseLable" Content="Expenses" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
 
@@ -245,33 +200,12 @@
                         </Style>
                     </TextBox.Style>
                 </TextBox>
-                <Button x:Name="AddProfitBtn" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Style="{DynamicResource RoundCorner}"/>
-                <TextBox x:Name="ExpenseTB" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                 BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="160" Margin="0,105,0,0" TextWrapping="Wrap">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <Label Content="Expense" Foreground="LightGray" FontSize="21" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
+                <Button x:Name="AddProfitBtn" Command="{Binding AddExpenseCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Style="{DynamicResource RoundCorner}"/>
+                <TextBox x:Name="ExpenseTB" Text="{Binding ExpenseValue}" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="160" Margin="0,105,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21" Background="Transparent">
                 </TextBox>
-                <ComboBox x:Name="ExpensesCategoryCB" ItemsSource="{Binding Category}" DisplayMemberPath="Category" HorizontalAlignment="Center" Height="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="180"/>
+                <ComboBox x:Name="ExpensesCategoryCB" ItemsSource="{Binding ExpenseCategories}" SelectedItem="{Binding SelectedCategory}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Center" Height="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="180"/>
             </Grid>
         </Grid>
     </Grid>
