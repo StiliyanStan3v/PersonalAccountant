@@ -144,21 +144,22 @@
         <Grid Name="AccWrapper" Width="380" Height="600" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
             <Label Content="Your accountant" HorizontalAlignment="Center" Margin="0,1,0,0" VerticalAlignment="Top" FontSize="40" Foreground="#FF379797" FontWeight="Bold"/>
             <Label x:Name="accountTitleLable" Content="Account" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
-            <Grid Name ="AccountGrid" Width="380" Height="205" Margin="0,120,0,0" VerticalAlignment="Top">
+            <Grid Name ="AccountGrid" Width="380" Height="220" Margin="0,120,0,0" VerticalAlignment="Top">
                 <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
                 <Label x:Name="CurrentLabel" Content="Current funds" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59" FontWeight="DemiBold"/>
                 <Label x:Name="SavingsLabel" Content="Savings" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59" FontWeight="DemiBold"/>
                 <Label x:Name="MonthlyProfitLabel" Content="Monthly profit" HorizontalAlignment="Left" Margin="5,75,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentExpensesLabel" Content="Current expences" HorizontalAlignment="Left" Margin="5,110,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="SavingPlanLabel" Content="Saving plan" Margin="5,145,224,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentDecimalLabel" Content="{Binding CurrentFunds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,5,0,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="SavingsDecimalLabel" Content="{Binding Savings, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,40,0,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,75,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,145,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentDecimalLabel" Content="{Binding CurrentFunds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,5,5,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="SavingsDecimalLabel" Content="{Binding Savings, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,40,5,0" FontWeight="DemiBold" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,75,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,145,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Button Content="Saving Plan" Command="{Binding SavingPlanButtonCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70" Margin="0,0,10,10"/>
             </Grid>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,340,0,0" Height="60" Width="360">
-                <Button x:Name="Profit" Content="Profits" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Style="{DynamicResource RoundCorner}" Click="AddProfit_Click"/>
+                <Button x:Name="Profit" Command="{Binding AddProfitWindow}" Content="Profits" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Style="{DynamicResource RoundCorner}" Click="AddProfit_Click"/>
                 <Button x:Name="Expense" Content="Expense" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{DynamicResource RoundCorner}" Click="AddExpense_Click"/>
             </Grid>
             <DataGrid x:Name="LogDG" IsReadOnly="True" HorizontalAlignment="Left" Height="185" Margin="10,405,0,0" AutoGenerateColumns="False" VerticalAlignment="Top" Width="360">

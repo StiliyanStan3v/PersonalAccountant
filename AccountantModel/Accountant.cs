@@ -7,6 +7,8 @@
 
     public class Accountant : INotifyPropertyChanged
     {
+        private PropertyChangedEventHandler _propertyChangedEventHandler;
+
         public Account MyAccount { get; set; }
         public MonthlyExpensesControl ExpensesView { get; set; }
 

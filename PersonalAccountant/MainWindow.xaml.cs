@@ -14,8 +14,6 @@ namespace PersonalAccountant
 
         private void AddProfit_Click(object sender, RoutedEventArgs e)
         {
-            ProfitWindow profWin = new ProfitWindow();
-            profWin.ShowDialog();
         }
 
         private void AddExpense_Click(object sender, RoutedEventArgs e)

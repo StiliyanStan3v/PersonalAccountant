@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AccountantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelayCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountantModel\AccountantModel.csproj">
