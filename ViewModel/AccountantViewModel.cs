@@ -6,7 +6,7 @@
     using System.ComponentModel;
     using PersonalAccountant.Data;
     using ViewModel;
-    
+    using System;
 
     public class AccountantViewModel : INotifyPropertyChanged
     {
@@ -16,8 +16,15 @@
 
         #region Properties
         public ICommand UpdateButtonCommand { get; set; }
+
         public ICommand AddFundsCommand { get; set; }
+
         public ICommand AddExpenseCommand { get; set; }
+
+        public ICommand SaveButtonCommand { get; set; }
+
+        public ICommand RestartingCommand { get; set; }
+
         public IList<string> ExpenseCategories
         {
             get
@@ -26,6 +33,7 @@
                 return categories;
             }
         }
+
         public ICollection<MonthlyExpenseViewData> MonthlyExpenses
         {
             get
@@ -33,7 +41,9 @@
                 return _Accountant.ExpensesView.ExpensesViewDataList;
             }
         }
+
         public Accountant _Accountant { get; set; }
+
         public decimal MonthlyProfit
         {
             get
@@ -44,9 +54,12 @@
             {
                 _Accountant.MyAccount.MonthlyProfit = value;
                 OnPropertyChanged("MonthlyProfit");
+                OnPropertyChanged("SavingPlan");
             }
         }
+
         public decimal AddFund { get; set; }
+
         public decimal Funds
         {
             get
@@ -54,15 +67,19 @@
                 return _Accountant.MyAccount.Funds;
             }
         }
+
         public decimal CurrentExpenses
         {
             get
             {
-                return _Accountant.MyAccount.CurrentExpenses;
+                return _Accountant.CurrentExpenses;
             }
         }
+
         public string SelectedCategory { get; set; }
+
         public decimal ExpenseValue { get; set; }
+
         public decimal SavingPlan
         {
             get
@@ -70,6 +87,7 @@
                 return _Accountant.SavingPlan;
             }
         }
+
         public decimal PlannedExpenses
         {
             get
@@ -77,6 +95,7 @@
                 return _Accountant.PlannedExpenses;
             }
         }
+
         public bool CanExecute
         {
             get
@@ -94,6 +113,7 @@
                 this.canExecute = value;
             }
         }
+        
         #endregion
         #region Private Methods
         private void UpdateAccountInfo(object obj)
@@ -101,33 +121,45 @@
             OnPropertyChanged("SavingPlan");
             OnPropertyChanged("PlannedExpenses");
         }
+
         private void AddFunds(object obj)
         {
             _Accountant.AddingFunds(AddFund);
             OnPropertyChanged("Funds");
         }
+
         private void AddExpenses(object obj)
         {
             _Accountant.AddExpense(SelectedCategory, ExpenseValue);
             OnPropertyChanged("CurrentExpenses");
             OnPropertyChanged("Funds");
         }
+
+        private void Save(object obj)
+        {
+            _Accountant.Save();
+        }
+
+        private void Restart(object obj)
+        {
+            _Accountant.New();
+            OnPropertyChanged("");
+        }
         #endregion
         #region Construcotrs
         public AccountantViewModel(string path)
         {
-            if (File.Exists(path))
-            {
-                _Accountant = Accountant.Load(path);
-            }
-            else
-            {
-                _Accountant = new Accountant();
-            }
+            _Accountant = new Accountant();
+
+            _Accountant.Load(path);
+
+
             UpdateButtonCommand = new RelayCommand(UpdateAccountInfo, param => this.canExecute);
             AddFundsCommand = new RelayCommand(AddFunds, param => this.canExecute);
             AddExpenseCommand = new RelayCommand(AddExpenses, param => this.canExecute);
-        }
+            SaveButtonCommand = new RelayCommand(Save, param => this.canExecute);
+            RestartingCommand = new RelayCommand(Restart, param => this.canExecute);
+        } 
         #endregion
         #region Protected Methods
         protected void OnPropertyChanged(string name)

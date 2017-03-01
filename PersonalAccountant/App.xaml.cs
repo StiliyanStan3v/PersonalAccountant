@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace PersonalAccountant
 {
@@ -8,11 +7,12 @@ namespace PersonalAccountant
     /// </summary>
     public partial class App : Application
     {
+        AccountantViewModel AccVM;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             MainWindow window = new MainWindow();
-            AccountantViewModel AccVM = new AccountantViewModel("");
+            AccVM = new AccountantViewModel("Settings.xml");
             window.DataContext = AccVM;
             window.Show();
         }

@@ -169,7 +169,10 @@
                 <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,40,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,75,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Button Content="Update" Command="{Binding UpdateButtonCommand}" HorizontalAlignment="Center" FontSize="17" VerticalAlignment="Bottom" Width="90" Height="35" Margin="180,0,0,17" Style="{DynamicResource RoundCorner}"/>
+                <Button Content="Update" Command="{Binding UpdateButtonCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="220,0,0,15" Style="{DynamicResource RoundCorner}"/>
+                <Button Content="Save" Command="{Binding SaveButtonCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="0,0,0,15" Style="{DynamicResource RoundCorner}"/>
+                <Button Content="New budget" Command="{Binding RestartingCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="0,0,220,15" Style="{DynamicResource RoundCorner}"/>
+
             </Grid>
             <Label x:Name="ExpenseLable" Content="Expenses" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
 
