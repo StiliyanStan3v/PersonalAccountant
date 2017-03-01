@@ -8,6 +8,5 @@
         ICollection<Profit> MonthlyProfits { get; set; }
         decimal Funds { get; set; }
         decimal MonthlyProfit { get; set; }
-        decimal CurrentExpenses { get; set; }
     }
 }

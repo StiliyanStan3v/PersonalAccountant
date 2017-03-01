@@ -88,7 +88,7 @@
         private void DataToXML()
         {
             XElement settings = new XElement("AccountantSettings", new XElement("AccountBudget", new XAttribute("Funds", MyAccount.Funds),
-                new XAttribute("MonthlyProfit", MyAccount.MonthlyProfit), new XAttribute("CurrentExpenses", MyAccount.CurrentExpenses),
+                new XAttribute("MonthlyProfit", MyAccount.MonthlyProfit), new XAttribute("CurrentExpenses", CurrentExpenses),
                 new XAttribute("SavingPlan", SavingPlan), new XAttribute("PlannedExpenses", PlannedExpenses)));
 
             XElement monthlyExpenses = new XElement("MonthlyExpenses");

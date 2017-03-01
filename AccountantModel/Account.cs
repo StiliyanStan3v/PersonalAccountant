@@ -8,7 +8,6 @@
         public ICollection<Profit> MonthlyProfits { get; set; }
         public decimal Funds { get; set; }
         public decimal MonthlyProfit { get; set; }
-        public decimal CurrentExpenses { get; set; }
         #endregion
         #region Constructors
         public Account()
@@ -20,7 +19,6 @@
             IList<Expense> monthlyExpenses, IList<Profit> monthlyProfits)
         {
             this.Funds = funds;
-            this.CurrentExpenses = currentExpenses;
             this.MonthlyProfit = monthlyProfit;
             this.MonthlyExpenses = monthlyExpenses;
             this.MonthlyProfits = monthlyProfits;
