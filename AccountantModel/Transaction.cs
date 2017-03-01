@@ -4,7 +4,13 @@
 
     public abstract class Transaction : ITransaction
     {
-
+        #region Properties
+        public string Description { get; set; }
+        public decimal Value { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public string Category { get; set; }
+        #endregion
+        #region Constructors
         protected Transaction() { }
 
         protected Transaction(string description, decimal value)
@@ -28,13 +34,6 @@
             this.Value = value;
             this.TransactionDate = transactionDate;
         }
-
-        public string Description { get; set; }
-
-        public decimal Value { get; set; }
-
-        public DateTime TransactionDate { get; set; }
-
-        public string Category { get; set; }
+        #endregion
     }
 }

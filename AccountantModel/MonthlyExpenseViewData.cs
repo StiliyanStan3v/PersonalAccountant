@@ -6,11 +6,11 @@
 
     public class MonthlyExpenseViewData : INotifyPropertyChanged
     {
+        #region private fields
         private decimal spentFunds;
         private decimal plannedFunds;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        #endregion
+        #region Properties
         public string Category { get; set; }
         public decimal PlannedFunds
         {
@@ -46,7 +46,6 @@
                 return SpentFunds > PlannedFunds ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
             }
         }
-        
         public FontWeight FontWeight
         {
             get
@@ -54,7 +53,11 @@
                 return SpentFunds > PlannedFunds ? FontWeights.Bold : FontWeights.Normal;
             }
         }
-
+        #endregion
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+        #region Protected methods
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -63,5 +66,6 @@
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+        #endregion
     }
 }

@@ -2,18 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    public class CustomControlObservableColletion : System.Collections.ObjectModel.ObservableCollection<MonthlyExpenseViewData>
-    {
-        // Required because, by default, it is not possible to find out which items
-        // have been cleared when the CollectionChanged event is fired after a .Clear() call.
-        protected override void ClearItems()
-        {
-            foreach (var item in Items.ToList())
-                Remove(item);
-        }
-
-    }
 
     public static class Helper
     {
