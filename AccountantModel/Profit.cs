@@ -14,8 +14,8 @@ namespace PersonalAccountant
         {
 
         }
-        public Profit(string description, decimal value, DateTime transactionDate) 
-            : base(description, value, transactionDate)
+        public Profit(string description, decimal value) 
+            : base(description, value)
         {
 
         }

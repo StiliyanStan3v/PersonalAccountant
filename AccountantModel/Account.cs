@@ -1,29 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PersonalAccountant.Data
 {
-    public class Account : IAccount
+    public class Account : IAccount, INotifyPropertyChanged
     {
-         public ICollection<Expense> MonthlyExpenses { get; set; }
-         public ICollection<Profit> MonthlyProfits { get; set; }
-         public decimal CurrentFunds { get; set; }
-         public decimal Savings { get; set; }
+        public ICollection<Expense> MonthlyExpenses { get; set; }
+        public ICollection<Profit> MonthlyProfits { get; set; }
 
-        //public decimal MonthlyProfit { get; set; }
-        // //{
-        // //    get
-        // //    {
-        // //        return this.MonthlyProfits.Sum(mp => mp.Value);
-        // //    }
-        // //}
-         public decimal PotentialSavings { get; set; }
-        // //{
-        // //    get
-        // //    {
-        // //        return this.MonthlyProfits.Sum(mp => mp.Value) - Expense.ExpenseViewData.Sum(exp => exp.PlannedFunds);
-        // //    }
-        // //}
-        //
+        public decimal Funds { get; set; }
+
         public Account()
         {
             MonthlyExpenses = new List<Expense>();
@@ -32,12 +18,20 @@ namespace PersonalAccountant.Data
         public Account(decimal currentFunds, decimal savings, decimal monthlyExpens,
             IList<Expense> monthlyExpenses, IList<Profit> monthlyProfits)
         {
-            this.CurrentFunds = currentFunds;
-            this.Savings = savings;
             this.MonthlyExpenses = monthlyExpenses;
             this.MonthlyProfits = monthlyProfits;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
         //public event PropertyChangedEventHandler PropertyChanged;
 
         //public void AddProfit(Profit profit)

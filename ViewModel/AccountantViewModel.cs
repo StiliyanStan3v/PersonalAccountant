@@ -32,8 +32,8 @@
             }
         }
 
-        public ICommand SavingPlanButtonCommand { get; set; }
-        public ICommand AddProfitButtonCommand { get; set; }
+        public ICommand UpdateButtonCommand { get; set; }
+        public ICommand SettingsButtonCommand { get; set; }
 
         
 
@@ -49,15 +49,16 @@
             {
                 _Accountant = new Accountant();
             }
-            SavingPlanButtonCommand = new RelayCommand(UpdateSavingPlan, param => this.canExecute);
-            AddProfitButtonCommand = new RelayCommand(AddProfit, param => this.canExecute);
+            UpdateButtonCommand = new RelayCommand(UpdateAccountInfo, param => this.canExecute);
+            SettingsButtonCommand = new RelayCommand(ChangeSettings, param => this.canExecute);
         }
 
-        private void UpdateSavingPlan(object obj)
+        private void UpdateAccountInfo(object obj)
         {
             OnPropertyChanged("SavingPlan");
+            OnPropertyChanged("PlannedExpenses");
         }
-        private void AddProfit(object obj)
+        private void ChangeSettings(object obj)
         {
             _Accountant.AddProfit("Selary", "1000");
         }
@@ -79,6 +80,14 @@
             }
         }
 
+        public decimal Funds
+        {
+            get
+            {
+                return _Accountant.MyAccount.Funds;
+            }
+        }
+
         public decimal CurrentExpenses
         {
             get
@@ -92,6 +101,14 @@
             get
             {
                 return _Accountant.SavingPlan;
+            }
+        }
+
+        public decimal PlannedExpenses
+        {
+            get
+            {
+                return _Accountant.PlannedExpenses;
             }
         }
 

@@ -11,6 +11,7 @@
         {
             this.Description = description;
             this.Value = value;
+            this.TransactionDate = DateTime.Now;
         }
 
         protected Transaction(string description, decimal value, DateTime transactionDate)

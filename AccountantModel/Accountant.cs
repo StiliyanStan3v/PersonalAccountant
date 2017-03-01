@@ -7,8 +7,6 @@
 
     public class Accountant : INotifyPropertyChanged
     {
-        private PropertyChangedEventHandler _propertyChangedEventHandler;
-
         public Account MyAccount { get; set; }
         public MonthlyExpensesControl ExpensesView { get; set; }
 
@@ -36,6 +34,14 @@
             }
         }
 
+        public decimal PlannedExpenses
+        {
+            get
+            {
+                return ExpensesView.ExpensesViewDataList.Select(expData => expData.PlannedFunds).Sum();
+            }
+        }
+
         public decimal SavingPlan
         {
             get
@@ -43,7 +49,6 @@
                 return MonthlyProfit - ExpensesView.ExpensesViewDataList.Select(expData => expData.PlannedFunds).Sum();
             }
         }
-
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -59,7 +64,7 @@
 
         public void AddProfit(string description, string value)
         {
-            MyAccount.MonthlyProfits.Add(new Profit(description, decimal.Parse(value), DateTime.Now));
+            MyAccount.MonthlyProfits.Add(new Profit(description, decimal.Parse(value)));
         }
     }
 }

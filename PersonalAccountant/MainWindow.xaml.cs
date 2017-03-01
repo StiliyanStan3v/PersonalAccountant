@@ -12,10 +12,6 @@ namespace PersonalAccountant
             InitializeComponent();
         }
 
-        private void AddProfit_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void AddExpense_Click(object sender, RoutedEventArgs e)
         {
             ExpenseWindow expWin = new ExpenseWindow();
