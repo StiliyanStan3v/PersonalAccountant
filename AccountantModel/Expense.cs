@@ -24,19 +24,20 @@ namespace PersonalAccountant
         Other
     }
 
-    public class Expense : Transaction
+    public sealed class Expense : Transaction
     {
 
         public Expense(string category, string description, decimal value)
-            : base(description, value)
+            : base(category, description, value)
         {
-
+            base.TransactionDate = DateTime.Now;
+        }
+        public Expense(string category, string description, decimal value, string dateTime)
+            : base(category, description, value)
+        {
+            base.TransactionDate = DateTime.Parse(dateTime);
         }
 
-        public Expense(string category, string description, decimal value, DateTime transactionTime)
-            : base(category, description, value, transactionTime)
-        {
 
-        }
     }
 }

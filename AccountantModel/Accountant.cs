@@ -4,12 +4,14 @@
     using System.Linq;
     using System.Collections.Generic;
     using System.Xml.Linq;
+    using AccountantModel;
 
     public class Accountant
     {
         #region Properties
         public Account MyAccount { get; set; }
         public MonthlyExpensesControl ExpensesView { get; set; }
+
         public ICollection<MonthlyExpenseViewData> MonthlyExpenseView { get; private set; }
         public decimal AddFund { get; set; }
         public decimal PlannedExpenses
@@ -32,6 +34,14 @@
             get
             {
                 return ExpensesView.ExpensesViewDataList.Select(evd => evd.SpentFunds).Sum();
+            }
+        }
+
+        public decimal PlannedSpentStatus
+        {
+            get
+            {
+                return ExpensesView.PlannedSpentStatus;
             }
         }
         #endregion
@@ -57,26 +67,46 @@
         {
             MyAccount = new Account();
             ExpensesView = new MonthlyExpensesControl();
+            TransactionsLog.Instance().NewLog();
         }
 
-        public void AddExpense(string category, decimal value)
+        public void AddTransaction(string category, string description, decimal value)
         {
             try
             {
-                MyAccount.Funds -= value;
+                if(value != 0)
+                {
+                    if (category == "Single income")
+                    {
+                        ITransaction profit = new Profit(category, description, value);
+                        MyAccount.Funds += value;
+                        TransactionsLog.Instance().SaveToLog(new TransactionView(profit));
+                    }
+                    else if(category == "Monthly income")
+                    {
+                        ITransaction profit = new Profit(category, description, value);
+                        TransactionsLog.Instance().SaveToLog(new TransactionView(profit));
+                        MyAccount.MonthlyProfits.Add(profit); 
+                    }
+                    else
+                    {
+                        ITransaction expense = new Expense(category, description, value);
 
-                ExpensesView.ExpensesViewDataList.Where(evd => evd.Category == category)
-                                        .FirstOrDefault()
-                                        .SpentFunds += value;
+                        MyAccount.Funds -= value;
+
+                        ExpensesView.ExpensesViewDataList.Where(evd => evd.Category == category)
+                                                .FirstOrDefault()
+                                                .SpentFunds += value;
+
+                        MyAccount.MonthlyExpenses.Add(expense);
+                        TransactionsLog.Instance().SaveToLog(new TransactionView(expense));
+                    }
+                }   
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }  
-        }
-        public decimal AddingFunds(decimal value)
-        {
-            return MyAccount.Funds += value;
         }
 
         public void Save()
@@ -101,6 +131,25 @@
             }
 
             settings.Add(monthlyExpenses);
+
+            XElement transactionsLog = new XElement("TransactionsLog");
+            foreach (var item in TransactionsLog.Instance().LogList())
+            {
+                var description = string.Empty;
+                if(item.Description != null)
+                {
+                    description = item.Description;
+                }
+
+                transactionsLog.Add(new XElement("Transaction",
+                    new XAttribute("Category", item.Category),
+                    new XAttribute("Type", item.Type),
+                    new XAttribute("Description", description),
+                    new XAttribute("Value", item.Value),
+                    new XAttribute("TransactionDate", item.TransactionDate)));
+            }
+            settings.Add(transactionsLog);
+
             settings.Add(new XElement("DateTime", DateTime.Now.ToShortDateString()));
 
             settings.Save("Settings.xml");
@@ -117,7 +166,6 @@
                 var monthlyProfit = settings.Element("AccountBudget").Attribute("MonthlyProfit").Value;
 
                 MyAccount.Funds = Decimal.Parse(fund);
-                MyAccount.MonthlyProfit = Decimal.Parse(monthlyProfit);
 
                 var expViewDataXml = settings.Element("MonthlyExpenses");
 
@@ -127,6 +175,20 @@
 
                     ev.PlannedFunds = Decimal.Parse(currEl.Attribute("PlannedFunds").Value);
                     ev.SpentFunds = Decimal.Parse(currEl.Attribute("SpentFunds").Value);
+                }
+
+                foreach (var item in settings.Element("TransactionsLog").Elements())
+                {
+                    var category = item.Attribute("Category").Value;
+
+                    if (category == "Profit")
+                        TransactionsLog.Instance().SaveToLog(new TransactionView(new Profit(item.Attribute("Type").Value,
+                            item.Attribute("Description").Value, decimal.Parse(item.Attribute("Value").Value),
+                            item.Attribute("TransactionDate").Value)));
+                    else
+                        TransactionsLog.Instance().SaveToLog(new TransactionView(new Expense(item.Attribute("Type").Value,
+                        item.Attribute("Description").Value, decimal.Parse(item.Attribute("Value").Value),
+                        item.Attribute("TransactionDate").Value)));
                 }
             }
             catch (Exception)

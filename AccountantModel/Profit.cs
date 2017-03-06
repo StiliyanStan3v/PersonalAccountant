@@ -8,7 +8,7 @@ namespace PersonalAccountant
         Other
     }
 
-    public class Profit : Transaction
+    public sealed class Profit : Transaction
     {
         public Profit()
         {
@@ -19,10 +19,16 @@ namespace PersonalAccountant
         {
 
         }
-        public Profit(string category, string description, decimal value, DateTime transactionDate)
-            : base(category, description, value, transactionDate)
+        public Profit(string category, string description, decimal value)
+            : base(category, description, value)
         {
             this.Category = category;
+        }
+        public Profit(string category, string description, decimal value, string dateTime)
+            : base(category, description, value)
+        {
+            this.Category = category;
+            this.TransactionDate = DateTime.Parse(dateTime);
         }
     }
 }

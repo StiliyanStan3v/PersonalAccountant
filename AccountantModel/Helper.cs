@@ -31,6 +31,8 @@
         public static List<string> Categories()
         {
             var categories = new List<string>();
+            categories.Add("Single income");
+            categories.Add("Monthly income");
 
             foreach (ExpenseCategory expCategory in Enum.GetValues(typeof(ExpenseCategory)))
             {
@@ -38,6 +40,11 @@
             }
 
             return categories;
+        }
+
+        public static string ToCurrencyString(this decimal value)
+        {
+            return string.Format("{0:C}", value);
         }
     }
 }

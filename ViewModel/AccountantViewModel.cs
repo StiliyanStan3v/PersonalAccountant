@@ -1,12 +1,11 @@
 ﻿namespace PersonalAccountant
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Windows.Input;
     using System.ComponentModel;
     using PersonalAccountant.Data;
     using ViewModel;
-    using System;
+    using AccountantModel;
 
     public class AccountantViewModel : INotifyPropertyChanged
     {
@@ -19,13 +18,13 @@
 
         public ICommand AddFundsCommand { get; set; }
 
-        public ICommand AddExpenseCommand { get; set; }
+        public ICommand AddTransactionCommand { get; set; }
 
         public ICommand SaveButtonCommand { get; set; }
 
         public ICommand RestartingCommand { get; set; }
 
-        public IList<string> ExpenseCategories
+        public IList<string> TransactionCategories
         {
             get
             {
@@ -42,57 +41,64 @@
             }
         }
 
+        public ICollection<TransactionView> TransactionLog
+        {
+            get
+            {
+                return TransactionsLog.Instance().LogList();
+            }
+        }
+
+
         public Accountant _Accountant { get; set; }
 
-        public decimal MonthlyProfit
+        public string MonthlyProfit
         {
             get
             {
-                return _Accountant.MyAccount.MonthlyProfit;
-            }
-            set
-            {
-                _Accountant.MyAccount.MonthlyProfit = value;
-                OnPropertyChanged("MonthlyProfit");
-                OnPropertyChanged("SavingPlan");
+                return _Accountant.MyAccount.MonthlyProfit.ToCurrencyString();
             }
         }
 
-        public decimal AddFund { get; set; }
+        public decimal GetAddFundValue { get; set; }
 
-        public decimal Funds
+        public string Funds
         {
             get
             {
-                return _Accountant.MyAccount.Funds;
+                return _Accountant.MyAccount.Funds.ToCurrencyString();
             }
         }
 
-        public decimal CurrentExpenses
+        public string CurrentExpenses
         {
             get
             {
-                return _Accountant.CurrentExpenses;
+                return _Accountant.CurrentExpenses.ToCurrencyString();
             }
         }
 
-        public string SelectedCategory { get; set; }
+        public string GetSelectedCategory { get; set; }
 
-        public decimal ExpenseValue { get; set; }
+        public string GetExpenseDescription { get; set; }
 
-        public decimal SavingPlan
+        public decimal GetExpenseValue { get; set; }
+
+        public string SavingPlan
         {
-            get
-            {
-                return _Accountant.SavingPlan;
-            }
+            get { return _Accountant.SavingPlan.ToCurrencyString(); }
         }
 
-        public decimal PlannedExpenses
+        public string PlannedSpentStatus
+        {
+            get { return _Accountant.PlannedSpentStatus.ToCurrencyString(); }
+        }
+
+        public string PlannedExpenses
         {
             get
             {
-                return _Accountant.PlannedExpenses;
+                return _Accountant.PlannedExpenses.ToCurrencyString();
             }
         }
 
@@ -118,21 +124,13 @@
         #region Private Methods
         private void UpdateAccountInfo(object obj)
         {
-            OnPropertyChanged("SavingPlan");
-            OnPropertyChanged("PlannedExpenses");
+            OnPropertyChanged("");
         }
 
-        private void AddFunds(object obj)
+        private void AddTransaction(object obj)
         {
-            _Accountant.AddingFunds(AddFund);
-            OnPropertyChanged("Funds");
-        }
-
-        private void AddExpenses(object obj)
-        {
-            _Accountant.AddExpense(SelectedCategory, ExpenseValue);
-            OnPropertyChanged("CurrentExpenses");
-            OnPropertyChanged("Funds");
+            _Accountant.AddTransaction(GetSelectedCategory, GetExpenseDescription, GetExpenseValue);
+            OnPropertyChanged("");
         }
 
         private void Save(object obj)
@@ -155,8 +153,7 @@
 
 
             UpdateButtonCommand = new RelayCommand(UpdateAccountInfo, param => this.canExecute);
-            AddFundsCommand = new RelayCommand(AddFunds, param => this.canExecute);
-            AddExpenseCommand = new RelayCommand(AddExpenses, param => this.canExecute);
+            AddTransactionCommand = new RelayCommand(AddTransaction, param => this.canExecute);
             SaveButtonCommand = new RelayCommand(Save, param => this.canExecute);
             RestartingCommand = new RelayCommand(Restart, param => this.canExecute);
         } 

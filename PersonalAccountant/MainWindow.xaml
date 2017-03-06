@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalAccountant"
         mc:Ignorable="d"
-        ResizeMode="CanMinimize"
+        
         WindowStartupLocation="CenterScreen"
-        Title="Yuor Personal Accountant" Height="710" Width="800">
+        Title="Your Personal Accountant" Height="710" Width="1250">
     <Window.Resources>
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -75,12 +75,13 @@
         <Grid.Background>
             <ImageBrush ImageSource="/PersonalAccountant;component/Resources/Money.jpg" Opacity="0.15"/>
         </Grid.Background>
-        <Grid Width="400" Height="620" HorizontalAlignment="Right" Margin="0,46,0,0">
+        <Label Content="Your accountant" HorizontalAlignment="Center" Margin="0,-10,0,0" VerticalAlignment="Top" FontSize="40" Foreground="#FF379797" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Grid Width="440" Height="640" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">
             <Grid Height="80" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
-                <Label x:Name="SumExpenseLabel" Content="Мonthly expences" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="38" Foreground="#FF379797"/>
+                <Label x:Name="SumExpenseLabel" Content="Мonthly expences" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="38" Foreground="#FF464F59"/>
             </Grid>
-            <Grid Height="380" Margin="0,0,0,180" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1">
-                <DataGrid ItemsSource="{Binding MonthlyExpenses}" Name="ExpensesGrid" HorizontalAlignment="Left" Width="370" Foreground="#FF2E2E2E" 
+            <Grid Height="571" Margin="0,60,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
+                <DataGrid ItemsSource="{Binding MonthlyExpenses}" Name="ExpensesGrid" HorizontalAlignment="Left" Width="420" Foreground="#FF2E2E2E" 
                       AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" SelectionUnit="FullRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Category" Binding="{Binding Category}"  IsReadOnly="True">
@@ -103,7 +104,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Spent" Binding="{Binding SpentFunds}" Width="*" MinWidth="40"  IsReadOnly="True">
+                        <DataGridTextColumn Header="Spent" Binding="{Binding SpentFundsCurrency}" Width="130" MinWidth="40"  IsReadOnly="True">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -138,54 +139,42 @@
                     </DataGrid.CellStyle>
                 </DataGrid>
             </Grid>
-            <Grid Width="370"  VerticalAlignment="Bottom" Height="180">
-                <Label x:Name="SettingsLable" Content="Settings" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
-                <Grid Height="110" Margin="0,50,0,0">
-                    <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
-                    <Button x:Name="AddFunds_Btn" Command="{Binding AddFundsCommand}" Content="Add funds" Width="120" Height="35" FontSize="17" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,13,20,0" Style="{DynamicResource RoundCorner}"/>
-                    <TextBox x:Name="FundsTB" Text="{Binding AddFund}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="170" Margin="20,10,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21" Background="Transparent">
-                    </TextBox>
-                    <TextBox x:Name="MonthlyProfitsTB" Text="{Binding MonthlyProfit, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="170" Margin="20,60,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21">
-                    </TextBox>
-                    <Label x:Name="MonthlyProfitLable" Content="Monthly profit" HorizontalAlignment="Right" Margin="0,63,20,0" VerticalAlignment="Top" FontSize="17" Foreground="#FF464F59" />
-                </Grid>
-            </Grid>
         </Grid>
-        <Grid Name="AccWrapper" Width="380" Height="660" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
-            <Label Content="Your accountant" HorizontalAlignment="Center" Margin="0,-10,0,0" VerticalAlignment="Top" FontSize="40" Foreground="#FF379797" FontWeight="Bold" Grid.ColumnSpan="2"/>
-            <Label x:Name="accountTitleLable" Content="Account" HorizontalAlignment="Center" Margin="0,42,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
-            <Grid Name ="AccountGrid" Width="380" Height="240" Margin="0,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Grid Name="AccWrapper" Width="430" Height="380" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,20,0,0">
+            <Label x:Name="accountTitleLable" Content="Account" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
+            <Grid Name ="AccountGrid" Width="420" Height="312" Margin="0,60,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
                 <Label x:Name="CurrentFundsLabel" Content="Funds" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="MonthlyProfitLabel" Content="Monthly profit" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentExpensesLabel" Content="Current expences" HorizontalAlignment="Left" Margin="5,75,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="SavingPlanLabel" Content="Saving plan" Margin="5,110,224,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="PlannedExpensesLabel" Content="Planned expenses" Margin="5,145,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="MonthlyProfitLabel" Content="Monthly profit" HorizontalAlignment="Left" Margin="5,45,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentExpensesLabel" Content="Current expences" HorizontalAlignment="Left" Margin="5,85,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="SavingPlanLabel" Content="Saving plan" Margin="5,125,224,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="PlannedExpensesLabel" Content="Planned expenses" Margin="5,165,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="BudgetStatus" Content="Planned/Spent status" Margin="5,205,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" Foreground="#FF464F59"/>
 
                 <Label x:Name="CurrentFundsDecimalLabel" Content="{Binding Funds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,5,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="PlannedExpensesDecimalLabel" Content="{Binding PlannedExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,145,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,40,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,75,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
-                <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,110,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="PlannedExpensesDecimalLabel" Content="{Binding PlannedExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,165,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="MonthlyProfitDecimalLabel" Content="{Binding MonthlyProfit, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,45,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentExpensesDecimalLabel" Content="{Binding CurrentExpenses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,85,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="CurrentPlanDecimalLabel" Content="{Binding SavingPlan, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="0,125,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
+                <Label x:Name="PlannedSpentDecimalLabel" Content="{Binding PlannedSpentStatus, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="5,205,5,0" VerticalAlignment="Top" FontSize="24" Foreground="#FF464F59"/>
                 <Button Content="Update" Command="{Binding UpdateButtonCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="220,0,0,15" Style="{DynamicResource RoundCorner}"/>
                 <Button Content="Save" Command="{Binding SaveButtonCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="0,0,0,15" Style="{DynamicResource RoundCorner}"/>
                 <Button Content="New budget" Command="{Binding RestartingCommand}" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Bottom" Width="90" Height="35" Margin="0,0,220,15" Style="{DynamicResource RoundCorner}"/>
-
             </Grid>
-            <Label x:Name="ExpenseLable" Content="Expenses" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
-
-            <Grid Height="250" Width="380" Margin="0,390,0,0" HorizontalAlignment="Center">
+        </Grid>
+        <Grid Margin="0,30,0,0"  Height="320" Width="380" VerticalAlignment="Top">
+            <Label x:Name="ExpenseLable" Content="Add transaction" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" FontSize="35" Foreground="#FF464F59" />
+            <Grid Margin="0,60,0,0" HorizontalAlignment="Center" Width="340">
                 <Border BorderBrush="#FF379797" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8"/>
-                <TextBox Name="DescriptionTB" Width="250" Height="80" Margin="0,160,0,0" FontSize="16" BorderThickness="2" BorderBrush="#FF379797"
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBox Name="DescriptionTB" Text="{Binding GetExpenseDescription}" Width="250" Height="80" Margin="0,165,0,0" FontSize="21" BorderThickness="2" BorderBrush="#FF379797"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Gray" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                AcceptsReturn="True">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
                                     <VisualBrush.Visual>
-                                        <Label Content="Description" Foreground="LightGray" FontSize="21" />
+                                        <Label Content="Description" Foreground="Gray" FontSize="21" />
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Style.Resources>
@@ -203,13 +192,117 @@
                         </Style>
                     </TextBox.Style>
                 </TextBox>
-                <Button x:Name="AddProfitBtn" Command="{Binding AddExpenseCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Style="{DynamicResource RoundCorner}"/>
-                <TextBox x:Name="ExpenseTB" Text="{Binding ExpenseValue}" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                 BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="160" Margin="0,105,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21" Background="Transparent">
+                <Button x:Name="AddProfitBtn" Command="{Binding AddTransactionCommand}" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" Style="{DynamicResource RoundCorner}"/>
+                <TextBox x:Name="ExpenseTB" Text="{Binding GetExpenseValue}" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                 BorderThickness="2" BorderBrush="#FF379797" Height="40" Width="160" Margin="0,110,0,0" TextWrapping="Wrap" Foreground="Gray" FontSize="21" Background="Transparent">
                 </TextBox>
-                <ComboBox x:Name="ExpensesCategoryCB" ItemsSource="{Binding ExpenseCategories}" SelectedItem="{Binding SelectedCategory}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                          HorizontalAlignment="Center" Height="30" Margin="0,60,0,0" VerticalAlignment="Top" Width="180"/>
+                <ComboBox x:Name="ExpensesCategoryCB" ItemsSource="{Binding TransactionCategories}" SelectedItem="{Binding GetSelectedCategory}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         HorizontalAlignment="Center" Height="30" Margin="0,65,0,0" VerticalAlignment="Top" Width="180">
+                    <ComboBox.Resources>
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="FontWeight" Value="DemiBold"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Style.Triggers>
+                                <Trigger Property="Content" Value="Monthly income">
+                                    <Setter Property="Foreground" Value="Blue"/>
+                                </Trigger>
+                                <Trigger Property="Content" Value="Single income">
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Resources>
+                </ComboBox>
             </Grid>
+        </Grid>
+        <Label x:Name="TransactionsLogLable" Content="Transactions log" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Center" FontSize="35" Foreground="#FF464F59" />
+        <Grid Height="240" Width="780" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,20">
+            <DataGrid ItemsSource="{Binding TransactionLog}" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="None" SelectionUnit="FullRow" CanUserResizeColumns="False"
+                      IsReadOnly="True" CanUserResizeRows="False" CanUserReorderColumns="False" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="70">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{Binding Color}"/>
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="150">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Value" Binding="{Binding ValueCurrency}" Width="100">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Transaction date" Binding="{Binding TransactionDate}" Width="110">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                        <Setter Property="Foreground" Value="#FF2E2E2E"/>
+                        <Setter Property="Margin" Value="0,0,0,5"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="#FF379797"/>
+                </DataGrid.Resources>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>

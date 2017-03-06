@@ -4,9 +4,9 @@
 
     public interface IAccount
     {
-        ICollection<Expense> MonthlyExpenses { get; set; }
-        ICollection<Profit> MonthlyProfits { get; set; }
+        ICollection<ITransaction> MonthlyExpenses { get; set; }
+        ICollection<ITransaction> MonthlyProfits { get; set; }
         decimal Funds { get; set; }
-        decimal MonthlyProfit { get; set; }
+        decimal MonthlyProfit { get; }
     }
 }

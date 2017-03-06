@@ -1,12 +1,15 @@
 ﻿namespace PersonalAccountant
 {
+    using AccountantModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System;
 
     public sealed class TransactionsLog
     {
         private static readonly TransactionsLog TransactionInstance = new TransactionsLog();
 
-        private readonly List<Transaction> transactions = new List<Transaction>();
+        private ObservableCollection<TransactionView> transactions = new ObservableCollection<TransactionView>();
         private TransactionsLog() { }
 
         public static TransactionsLog Instance()
@@ -14,14 +17,19 @@
             return TransactionInstance;
         }
 
-        public void SaveToLog(Transaction transaction)
+        public void SaveToLog(TransactionView transaction)
         {
             this.transactions.Add(transaction);
         }
 
-        public List<Transaction> LogList()
+        public ObservableCollection<TransactionView> LogList()
         {
             return this.transactions;
+        }
+
+        public void NewLog()
+        {
+            transactions = new ObservableCollection<TransactionView>();
         }
     }
 }

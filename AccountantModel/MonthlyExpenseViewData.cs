@@ -25,6 +25,14 @@
                 OnPropertyChanged("FontWeight");
             }
         }
+
+        public string PlannedFundsCurrency
+        {
+            get
+            {
+                return PlannedFunds.ToCurrencyString();
+            }
+        }
         public decimal SpentFunds
         {
             get
@@ -36,9 +44,18 @@
                 this.spentFunds = value;
                 OnPropertyChanged("Color");
                 OnPropertyChanged("FontWeight");
-                OnPropertyChanged("SpentFunds");
+                OnPropertyChanged("SpentFundsCurrency");
             }
         }
+
+        public string SpentFundsCurrency
+        {
+            get
+            {
+                return SpentFunds.ToCurrencyString();
+            }
+        }
+
         public Brush Color
         {
             get

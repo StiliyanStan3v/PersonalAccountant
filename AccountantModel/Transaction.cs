@@ -20,11 +20,12 @@
             this.TransactionDate = DateTime.Now;
         }
 
-        protected Transaction(string description, decimal value, DateTime transactionDate)
+        protected Transaction(string category, string description, decimal value)
         {
+            this.Category = category;
             this.Description = description;
             this.Value = value;
-            this.TransactionDate = transactionDate;
+            this.TransactionDate = DateTime.Now;
         }
 
         protected Transaction(string category, string description, decimal value, DateTime transactionDate)
